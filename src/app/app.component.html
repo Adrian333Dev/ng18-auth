@@ -1,1 +1,5 @@
-<router-outlet />
+@defer (when (auth$ | async)) {
+<router-outlet></router-outlet>
+} @loading (after 1s) {
+<div class="loading">Loading...</div>
+}
