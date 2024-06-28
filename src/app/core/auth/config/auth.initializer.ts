@@ -1,9 +1,4 @@
-import { InjectionToken } from '@angular/core';
-import {
-  HttpClient,
-  HttpContext,
-  HttpContextToken,
-} from '@angular/common/http';
+import { HttpClient, HttpContext } from '@angular/common/http';
 import { Store } from '@ngxs/store';
 import { catchError, firstValueFrom, of, switchMap } from 'rxjs';
 
@@ -12,29 +7,11 @@ import { ITokens } from '../interfaces';
 import { BuildAuthHttpHeaders } from '../utils';
 import { IUser } from '@/shared/interfaces';
 import { AuthStateActionSetUser } from '../store';
-
-// Define a token for inject the module settings in other classes
-export const AUTH_MODULE_CONFIG = new InjectionToken('AUTH_MODULE_CONFIG');
-
-// This interface defines our configuration object that needs to be passed
-// to our module on initialization. Add any setting here that is not
-// constant and you might want to configure differently for each app.
-// For example:
-export interface IAuthModuleConfig {
-  apiUrl: string;
-  loginRedirect: string;
-  afterLogoutRedirect: string;
-  unauthorizedRedirect: string;
-}
-
-// Define some constant keys that will be used to retreive the tokens
-// from the client's localStorage or cookies
-export const ACCESS_TOKEN_KEY = 'authAccess';
-export const REFRESH_TOKEN_KEY = 'authRefresh';
-
-// This is a context token we can pass to angular's HttpClient context
-// to tell it to bypass authentication checks.
-export const BYPASS_AUTH_INTERCEPTOR = new HttpContextToken(() => false);
+import {
+  BYPASS_AUTH_INTERCEPTOR,
+  IAuthModuleConfig,
+  REFRESH_TOKEN_KEY,
+} from './config';
 
 // The parameters for this function are provider in our module instance
 // Check the AuthModule providers.

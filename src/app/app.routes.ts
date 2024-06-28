@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { GuestGuard, StaffOnlyGuard } from './core/auth/guards';
 import { UserResolver } from './core/auth/resolvers';
 
-export const appRoutes: Routes = [
+export const routes: Routes = [
   // We can group routes that required authentication together
   // `LayoutAuthenticatedComponent` is an example layout for logged in users
   // which will be inherited to all chilren components/pages.

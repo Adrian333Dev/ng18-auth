@@ -1,3 +1,5 @@
+import { IUser } from "@/shared/interfaces";
+
 export interface ILoginInput {
   email: string;
   password: string;
@@ -14,9 +16,4 @@ export interface ITokens {
   refresh: string;
 }
 
-export interface IJwtPayload {
-  id: string;
-  email: string;
-  iat: number;
-  exp: number;
-}
+export interface IJwtPayload extends IUser {}

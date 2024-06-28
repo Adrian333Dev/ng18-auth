@@ -1,6 +1,6 @@
-import { IUser } from "@/shared/interfaces";
-import { Injectable } from "@angular/core";
-import { Action, State, StateContext } from "@ngxs/store";
+import { IUser } from '@/shared/interfaces';
+import { Injectable } from '@angular/core';
+import { Action, Selector, State, StateContext } from '@ngxs/store';
 
 export interface IAuthState {
   initialized: boolean;
@@ -23,7 +23,7 @@ export class AuthStateActionLogout {
  * The main Auth State class
  * `initialized` property is useful for filtering out store events
  *  that might trigger before the store is actually initialized.
-**/
+ **/
 @State<IAuthState>({
   name: 'auth',
   defaults: {
@@ -34,12 +34,11 @@ export class AuthStateActionLogout {
 })
 @Injectable()
 export class AuthState {
-
   /**
    * Updates the state with the user object.
    * Marks the state as initialized.
    * Sets the isGuest;
-  **/
+   **/
   @Action(AuthStateActionSetUser)
   setUser(ctx: StateContext<IAuthState>, { user }: AuthStateActionSetUser) {
     const state = ctx.getState();
@@ -61,5 +60,20 @@ export class AuthState {
       isGuest: true,
       initialized: true,
     });
+  }
+
+  @Selector()
+  static isGuest(state: IAuthState) {
+    return state.isGuest;
+  }
+
+  @Selector()
+  static isStaff(state: IAuthState) {
+    return !!state.user && true;
+  }
+
+  @Selector()
+  static user(state: IAuthState) {
+    return state.user;
   }
 }

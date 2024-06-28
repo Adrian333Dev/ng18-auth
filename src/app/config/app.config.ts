@@ -4,9 +4,10 @@ import {
   provideZoneChangeDetection,
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { NgxsModule, provideStore } from '@ngxs/store';
+import { provideStore } from '@ngxs/store';
+import { withNgxsReduxDevtoolsPlugin } from '@ngxs/devtools-plugin';
 
-import { routes } from './app.routes';
+import { routes } from '../app.routes';
 import {
   provideHttpClient,
   withFetch,
@@ -14,15 +15,18 @@ import {
   withJsonpSupport,
   withXsrfConfiguration,
 } from '@angular/common/http';
-import { AuthModule } from './core/auth/auth.module';
-import { environment } from '@env/environment.development';
-import { AuthState } from './core/auth/store';
+import { AuthModule } from '../core/auth/auth.module';
+import { environment as env } from '@env/environment.development';
+import { AuthState } from '../core/auth/store';
+import { ngxsConfig } from '.';
+
+const ngxsStates = [AuthState];
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideStore(),
+    provideStore(ngxsStates, ngxsConfig, withNgxsReduxDevtoolsPlugin()),
     // Set up the HTTP Client
     provideHttpClient(
       withJsonpSupport(),
@@ -32,17 +36,11 @@ export const appConfig: ApplicationConfig = {
       withInterceptorsFromDi()
     ),
     importProvidersFrom(
-      // Import our auth module and initialize settings for this app
       AuthModule.forRoot({
-        apiUrl: environment.apiUrl!, // pass the API url from an env var
+        apiUrl: env.apiUrl!, // pass the API url from an env var
         loginRedirect: '/account/login',
         unauthorizedRedirect: '/unauthorized',
         afterLogoutRedirect: '/',
-      }),
-
-      // Important: Initialize NGXS with the AuthState application wide.
-      NgxsModule.forRoot([AuthState], {
-        developmentMode: !environment.production,
       })
     ),
   ],

@@ -5,11 +5,7 @@ import { RouterModule } from '@angular/router';
 import { NgxsModule, Store } from '@ngxs/store';
 
 import { AuthState } from './store';
-import {
-  AUTH_MODULE_CONFIG,
-  IAuthModuleConfig,
-  initializeApp,
-} from './config';
+import { AUTH_MODULE_CONFIG, IAuthModuleConfig, initializeApp } from './config';
 import { AuthHttpInterceptor } from './interceptors';
 import { LocalStorageService } from './services';
 
@@ -18,15 +14,11 @@ import { LocalStorageService } from './services';
   imports: [CommonModule, NgxsModule.forFeature([AuthState]), RouterModule],
 })
 export class AuthModule {
-  static forRoot(
-    config: IAuthModuleConfig
-  ): ModuleWithProviders<AuthModule> {
+  static forRoot(config: IAuthModuleConfig): ModuleWithProviders<AuthModule> {
     return {
       ngModule: AuthModule,
       providers: [
-        // Make our configuration settings injectable inside our module
         { provide: AUTH_MODULE_CONFIG, useValue: config },
-        // Register our Http Inteceptor globally
         {
           provide: HTTP_INTERCEPTORS,
           useClass: AuthHttpInterceptor,
