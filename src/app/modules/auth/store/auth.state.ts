@@ -1,17 +1,18 @@
-import { IUser } from '@/shared/interfaces';
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
+
+import { IUserModel } from '@modules/user';
 
 export interface IAuthState {
   initialized: boolean;
   isGuest: boolean;
-  user: IUser | undefined;
+  user: IUserModel | undefined;
 }
 
 // State Action: Set User
 export class AuthStateActionSetUser {
   static readonly type = '[Auth] Set User';
-  constructor(public user: IUser | undefined) {}
+  constructor(public user: IUserModel | undefined) {}
 }
 
 // State Action: Logout

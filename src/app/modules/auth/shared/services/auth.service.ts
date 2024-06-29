@@ -4,16 +4,16 @@ import { Router } from '@angular/router';
 import { Store } from '@ngxs/store';
 import { catchError, of, switchMap, tap } from 'rxjs';
 
-import { IUser } from '@/shared/interfaces';
 import {
   ACCESS_TOKEN_KEY,
   AUTH_MODULE_CONFIG,
   IAuthModuleConfig,
   REFRESH_TOKEN_KEY,
-} from '../config';
+} from '../../config';
 import { LocalStorageService } from './local-storage.service';
-import { AuthStateActionLogout, AuthStateActionSetUser } from '../store';
-import { ILoginInput, ITokens } from '../interfaces';
+import { AuthStateActionLogout, AuthStateActionSetUser } from '../../store';
+import { ILoginInput, ITokens } from '../../interfaces';
+import { IUserModel } from '@modules/user';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -57,7 +57,7 @@ export class AuthService {
    * Retrieves the current user's profile.
    */
   whoami() {
-    return this.http.get<IUser>(`/api/auth/whoami`).pipe(
+    return this.http.get<IUserModel>(`/api/auth/whoami`).pipe(
       // In case we get an HTTP response like 401
       // Dispatch an event to log out the current user.
       catchError(() => {

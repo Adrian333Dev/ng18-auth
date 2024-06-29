@@ -1,9 +1,10 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
-import { AUTH_MODULE_CONFIG, IAuthModuleConfig } from '../config';
 import { Store } from '@ngxs/store';
-import { AuthState, IAuthState } from '../store';
 import { catchError, map, of } from 'rxjs';
+
+import { AUTH_MODULE_CONFIG, IAuthModuleConfig } from '@modules/auth/config';
+import { AuthState } from '@modules/auth/store';
 
 export const AuthGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);

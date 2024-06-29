@@ -7,7 +7,7 @@ import { NgxsModule, Store } from '@ngxs/store';
 import { AuthState } from './store';
 import { AUTH_MODULE_CONFIG, IAuthModuleConfig, initializeApp } from './config';
 import { AuthHttpInterceptor } from './interceptors';
-import { LocalStorageService } from './services';
+import { LocalStorageService } from './shared/services';
 
 @NgModule({
   declarations: [],

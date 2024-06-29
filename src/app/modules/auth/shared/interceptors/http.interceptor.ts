@@ -11,14 +11,14 @@ import {
 } from '@angular/common/http';
 import { Observable, catchError, switchMap, throwError } from 'rxjs';
 
-import { AuthService } from '../services';
 import {
   AUTH_MODULE_CONFIG,
   BYPASS_AUTH_INTERCEPTOR,
   IAuthModuleConfig,
-} from '../config';
-import { BuildAuthHttpHeaders } from '../utils';
-import { ITokens } from '../interfaces';
+} from '@modules/auth/config';
+import { AuthService } from '@modules/auth';
+import { BuildAuthHttpHeaders } from '@modules/auth/utils';
+import { ITokens } from '@modules/auth/interfaces';
 
 @Injectable()
 export class AuthHttpInterceptor implements HttpInterceptor {

@@ -2,16 +2,16 @@ import { HttpClient, HttpContext } from '@angular/common/http';
 import { Store } from '@ngxs/store';
 import { catchError, firstValueFrom, of, switchMap } from 'rxjs';
 
-import { LocalStorageService } from '../services';
+import { LocalStorageService } from '../shared/services';
 import { ITokens } from '../interfaces';
 import { BuildAuthHttpHeaders } from '../utils';
-import { IUser } from '@/shared/interfaces';
 import { AuthStateActionSetUser } from '../store';
 import {
   BYPASS_AUTH_INTERCEPTOR,
   IAuthModuleConfig,
   REFRESH_TOKEN_KEY,
 } from './config';
+import { IUserModel } from '@modules/user';
 
 // The parameters for this function are provider in our module instance
 // Check the AuthModule providers.
@@ -43,7 +43,7 @@ export function initializeApp(
             // If the refresh token is succesfful switch to getting
             // the user's profile
             switchMap((res) =>
-              http.get<IUser>(`${apiUrl}/auth/whoami`, {
+              http.get<IUserModel>(`${apiUrl}/auth/whoami`, {
                 context: httpContext,
                 headers: BuildAuthHttpHeaders(res.access),
               })

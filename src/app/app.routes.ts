@@ -7,7 +7,7 @@ import {
   UnauthorizedPageComponent,
 } from './core/auth/pages';
 import { NotFoundPageComponent } from './shared/pages';
-import { DashboardComponent } from './features/dashboard/dashboard.component';
+import { DashboardComponent } from './modules/user/pages/dashboard/dashboard.component';
 
 export const routes: Routes = [
   {
