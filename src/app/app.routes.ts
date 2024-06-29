@@ -1,48 +1,37 @@
 import { Routes } from '@angular/router';
-import { GuestGuard, StaffOnlyGuard } from './core/auth/guards';
+
+import { AuthGuard, GuestGuard } from './core/auth/guards';
 import { UserResolver } from './core/auth/resolvers';
+import {
+  LoginPageComponent,
+  UnauthorizedPageComponent,
+} from './core/auth/pages';
+import { NotFoundPageComponent } from './shared/pages';
+import { DashboardComponent } from './features/dashboard/dashboard.component';
 
 export const routes: Routes = [
-  // We can group routes that required authentication together
-  // `LayoutAuthenticatedComponent` is an example layout for logged in users
-  // which will be inherited to all chilren components/pages.
   {
     path: '',
-    // component: LayoutAuthenticatedComponent,
-    canActivate: [StaffOnlyGuard], // Guard
-    title: 'Admin',
-    children: [
-      {
-        path: 'portal',
-        children: [
-          {
-            path: '',
-            // component: PagePortalIndexComponent,
-            title: 'Client Portal',
-            resolve: {
-              currentUser: UserResolver // Resolver
-            },
-          },
-        ],
-      },
-    ],
+    component: DashboardComponent,
+    title: 'Dashboard',
+    canActivate: [AuthGuard],
+    resolve: { currentUser: UserResolver },
   },
   {
     path: 'login',
     title: 'Login',
-    canActivate: [GuestGuard], // Guard
-    // component: PageLoginComponent,
+    canActivate: [GuestGuard],
+    component: LoginPageComponent,
   },
 
   {
     path: 'unauthorized',
     title: 'Unauthorized Access',
-    // component: PageUnauthorizedComponent,
+    component: UnauthorizedPageComponent,
   },
-
   {
     path: '**',
     title: 'Page Not Found',
-    // component: PageNotfoundComponent,
+    component: NotFoundPageComponent,
   },
 ];

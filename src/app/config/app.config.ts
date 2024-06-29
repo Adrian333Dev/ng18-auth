@@ -18,7 +18,6 @@ import {
 import { AuthModule } from '../core/auth/auth.module';
 import { environment as env } from '@env/environment.development';
 import { AuthState } from '../core/auth/store';
-import { ngxsConfig } from '.';
 
 const ngxsStates = [AuthState];
 
@@ -26,7 +25,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideStore(ngxsStates, ngxsConfig, withNgxsReduxDevtoolsPlugin()),
+    provideStore(ngxsStates, withNgxsReduxDevtoolsPlugin()),
     // Set up the HTTP Client
     provideHttpClient(
       withJsonpSupport(),

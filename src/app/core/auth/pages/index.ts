@@ -1,4 +1,11 @@
-export * from './register';
-export * from './login';
-export * from './not-found';
-export * from './unauthorized';
+import { RegisterPageComponent } from './register';
+import { LoginPageComponent } from './login';
+import { UnauthorizedPageComponent } from './unauthorized';
+
+export { RegisterPageComponent, LoginPageComponent, UnauthorizedPageComponent };
+
+export const authPages = [
+  RegisterPageComponent,
+  LoginPageComponent,
+  UnauthorizedPageComponent,
+];
