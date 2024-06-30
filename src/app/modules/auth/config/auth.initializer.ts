@@ -11,7 +11,7 @@ import {
   IAuthModuleConfig,
   REFRESH_TOKEN_KEY,
 } from './config';
-import { IUserModel } from '@modules/user';
+import { IUserModel } from '~modules/user';
 
 // The parameters for this function are provider in our module instance
 // Check the AuthModule providers.

@@ -22,9 +22,9 @@
     "lib": ["ES2022", "dom"],
     "baseUrl": "./",
     "paths": {
-      "@config/*": ["src/app/config/*"],
-      "@modules/*": ["src/app/modules/*"],
-      "@env/*": ["src/environments/*"]
+      "~config/*": ["src/app/config/*"],
+      "~modules/*": ["src/app/modules/*"],
+      "~env/*": ["src/environments/*"]
     }
   },
   "angularCompilerOptions": {

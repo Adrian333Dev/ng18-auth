@@ -1,4 +1,4 @@
-import { IUserModel } from "@modules/user";
+import { IUserModel } from "~modules/user";
 
 
 export interface ILoginInput {

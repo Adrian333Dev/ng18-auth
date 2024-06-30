@@ -15,10 +15,10 @@ import {
   AUTH_MODULE_CONFIG,
   BYPASS_AUTH_INTERCEPTOR,
   IAuthModuleConfig,
-} from '@modules/auth/config';
-import { AuthService } from '@modules/auth';
-import { BuildAuthHttpHeaders } from '@modules/auth/utils';
-import { ITokens } from '@modules/auth/interfaces';
+} from '~modules/auth/config';
+import { AuthService } from '~modules/auth';
+import { BuildAuthHttpHeaders } from '~modules/auth/utils';
+import { ITokens } from '~modules/auth/interfaces';
 
 @Injectable()
 export class AuthHttpInterceptor implements HttpInterceptor {

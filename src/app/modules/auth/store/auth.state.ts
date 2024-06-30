@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 
-import { IUserModel } from '@modules/user';
+import { IUserModel } from '~modules/user';
 
 export interface IAuthState {
   initialized: boolean;

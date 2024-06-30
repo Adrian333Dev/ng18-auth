@@ -13,7 +13,7 @@ import {
 import { LocalStorageService } from './local-storage.service';
 import { AuthStateActionLogout, AuthStateActionSetUser } from '../../store';
 import { ILoginInput, ITokens } from '../../interfaces';
-import { IUserModel } from '@modules/user';
+import { IUserModel } from '~modules/user';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {

@@ -15,9 +15,9 @@ import {
   withJsonpSupport,
   withXsrfConfiguration,
 } from '@angular/common/http';
-import { AuthModule } from '../core/auth/auth.module';
-import { environment as env } from '@env/environment.development';
-import { AuthState } from '../core/auth/store';
+import { environment as env } from '~env/environment.development';
+import { AuthModule } from '~modules/auth';
+import { AuthState } from '~modules/auth/store';
 
 const ngxsStates = [AuthState];
 
