@@ -1,13 +1,4 @@
-import {
-  ApplicationConfig,
-  importProvidersFrom,
-  provideZoneChangeDetection,
-} from '@angular/core';
-import { provideRouter } from '@angular/router';
-import { provideStore } from '@ngxs/store';
-import { withNgxsReduxDevtoolsPlugin } from '@ngxs/devtools-plugin';
-
-import { routes } from '../app.routes';
+import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import {
   provideHttpClient,
   withFetch,
@@ -15,16 +6,21 @@ import {
   withJsonpSupport,
   withXsrfConfiguration,
 } from '@angular/common/http';
+import { provideRouter } from '@angular/router';
+import { provideStore } from '@ngxs/store';
+import { withNgxsReduxDevtoolsPlugin } from '@ngxs/devtools-plugin';
+
+import { appRoutes } from '~app';
 import { environment as env } from '~env/environment.development';
-import { AuthModule, authRoutes } from '~modules/auth';
 import { AuthState } from '~modules/auth/store';
+import { authRoutes, provideAuth } from '~modules/auth';
 
 const ngxsStates = [AuthState];
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes),
+    provideRouter(appRoutes),
     provideStore(ngxsStates, withNgxsReduxDevtoolsPlugin()),
     provideHttpClient(
       withJsonpSupport(),
@@ -32,13 +28,11 @@ export const appConfig: ApplicationConfig = {
       withXsrfConfiguration({}),
       withInterceptorsFromDi()
     ),
-    importProvidersFrom(
-      AuthModule.forRoot({
-        apiUrl: env.apiUrl!,
-        loginRedirect: authRoutes.login,
-        unauthorizedRedirect: '/unauthorized',
-        afterLogoutRedirect: '/',
-      })
-    ),
+    provideAuth({
+      apiUrl: env.apiUrl!,
+      loginRedirect: authRoutes.login,
+      unauthorizedRedirect: '/unauthorized',
+      afterLogoutRedirect: '/',
+    }),
   ],
 };

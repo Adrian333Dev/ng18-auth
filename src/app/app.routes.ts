@@ -11,7 +11,7 @@ import {
 import { appPathTitles, appPaths } from './constants';
 import { userPaths } from '~modules/user';
 
-export const routes: Routes = [
+export const appRoutes: Routes = [
   {
     path: appPaths.home,
     redirectTo: authPaths.login,

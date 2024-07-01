@@ -132,4 +132,3 @@ export const AuthHttpInterceptorProvider = {
   useClass: AuthHttpInterceptor,
   multi: true,
 };
-

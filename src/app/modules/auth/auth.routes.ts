@@ -1,9 +1,14 @@
 import { Routes } from '@angular/router';
 
 import { LoginPageComponent, RegisterPageComponent } from './pages';
-import { GuestGuard, authPathTitles, authPaths } from './shared';
+import { authPathTitles, authPaths } from './shared';
 
 export const AUTH_ROUTES: Routes = [
+  {
+    path: authPaths.base,
+    redirectTo: authPaths.login,
+    pathMatch: 'full',
+  },
   {
     path: authPaths.login,
     title: authPathTitles.login,
