@@ -16,7 +16,7 @@ import {
   withXsrfConfiguration,
 } from '@angular/common/http';
 import { environment as env } from '~env/environment.development';
-import { AuthModule } from '~modules/auth';
+import { AuthModule, authRoutes } from '~modules/auth';
 import { AuthState } from '~modules/auth/store';
 
 const ngxsStates = [AuthState];
@@ -26,18 +26,16 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideStore(ngxsStates, withNgxsReduxDevtoolsPlugin()),
-    // Set up the HTTP Client
     provideHttpClient(
       withJsonpSupport(),
       withFetch(),
       withXsrfConfiguration({}),
-      // This is required for our interceptor to work
       withInterceptorsFromDi()
     ),
     importProvidersFrom(
       AuthModule.forRoot({
-        apiUrl: env.apiUrl!, // pass the API url from an env var
-        loginRedirect: '/account/login',
+        apiUrl: env.apiUrl!,
+        loginRedirect: authRoutes.login,
         unauthorizedRedirect: '/unauthorized',
         afterLogoutRedirect: '/',
       })

@@ -1,11 +1,10 @@
-import { Component, Injectable } from '@angular/core';
-import { RouterModule, RouterOutlet } from '@angular/router';
-import { Select } from '@ngxs/store';
-import { AuthState, IAuthState } from './core/auth/store';
-import { Observable } from 'rxjs';
+import { Component, Injectable, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule, RouterOutlet } from '@angular/router';
+import { Observable } from 'rxjs';
+import { Store } from '@ngxs/store';
 
-
+import { AuthState, IAuthState } from '~modules/auth/store';
 
 @Component({
   selector: 'app-root',
@@ -15,5 +14,8 @@ import { CommonModule } from '@angular/common';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  @Select(AuthState) auth$!: Observable<IAuthState>;
+  // store = inject(Store);
+  constructor(private store: Store) {}
+
+  auth$: Observable<IAuthState> = this.store.select((state) => state.auth);
 }

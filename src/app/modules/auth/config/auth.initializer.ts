@@ -1,12 +1,14 @@
+import { APP_INITIALIZER } from '@angular/core';
 import { HttpClient, HttpContext } from '@angular/common/http';
 import { Store } from '@ngxs/store';
 import { catchError, firstValueFrom, of, switchMap } from 'rxjs';
 
-import { LocalStorageService } from '../shared/services';
+import { LocalStorageService } from '../shared/services/local-storage.service';
 import { ITokens } from '../interfaces';
 import { BuildAuthHttpHeaders } from '../utils';
 import { AuthStateActionSetUser } from '../store';
 import {
+  AUTH_MODULE_CONFIG,
   BYPASS_AUTH_INTERCEPTOR,
   IAuthModuleConfig,
   REFRESH_TOKEN_KEY,
@@ -60,3 +62,10 @@ export function initializeApp(
   }
   return () => null;
 }
+
+export const AuthInitializerProvider = {
+  provide: APP_INITIALIZER,
+  useFactory: initializeApp,
+  multi: true,
+  deps: [AUTH_MODULE_CONFIG, HttpClient, LocalStorageService, Store],
+};

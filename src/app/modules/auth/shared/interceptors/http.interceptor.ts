@@ -1,5 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import {
+  HTTP_INTERCEPTORS,
   HttpClient,
   HttpErrorResponse,
   HttpEvent,
@@ -125,3 +126,10 @@ export class AuthHttpInterceptor implements HttpInterceptor {
     );
   }
 }
+
+export const AuthHttpInterceptorProvider = {
+  provide: HTTP_INTERCEPTORS,
+  useClass: AuthHttpInterceptor,
+  multi: true,
+};
+

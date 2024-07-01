@@ -1,9 +1,14 @@
 export const appPaths = {
   home: '',
-  error404: '404',
+  notFound: '404',
+};
+
+export const appPathTitles = {
+  home: 'Home',
+  notFound: 'Not Found',
 };
 
 export const appRoutes = {
   home: `/${appPaths.home}`,
-  error404: `/${appPaths.error404}`,
+  notFound: `/${appPaths.notFound}`,
 };

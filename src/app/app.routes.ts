@@ -1,36 +1,37 @@
+import { NotFoundPageComponent } from './modules/shared/pages/not-found/not-found.component';
 import { Routes } from '@angular/router';
 
-import { AuthGuard, AUTH_ROUTES, authPaths } from '~modules/auth';
+import {
+  AuthGuard,
+  AUTH_ROUTES,
+  authPaths,
+  authPathTitles,
+  GuestGuard,
+} from '~modules/auth';
+import { appPathTitles, appPaths } from './constants';
+import { userPaths } from '~modules/user';
 
-// export const routes: Routes = [
-//   {
-//     path: '',
-//     component: DashboardComponent,
-//     title: 'Dashboard',
-//     canActivate: [AuthGuard],
-//     resolve: { currentUser: UserResolver },
-//   },
-//   {
-//     path: 'login',
-//     title: 'Login',
-//     canActivate: [GuestGuard],
-//     component: LoginPageComponent,
-//   },
-
-//   {
-//     path: 'unauthorized',
-//     title: 'Unauthorized Access',
-//     component: UnauthorizedPageComponent,
-//   },
-//   {
-//     path: '**',
-//     title: 'Page Not Found',
-//     component: NotFoundPageComponent,
-//   },
-// ];
-
-export const routes: Routes = [];
-
-
-
-
+export const routes: Routes = [
+  {
+    path: appPaths.home,
+    redirectTo: authPaths.login,
+    pathMatch: 'full',
+  },
+  {
+    path: authPaths.base,
+    loadChildren: () =>
+      import('~modules/auth/auth.routes').then((m) => m.AUTH_ROUTES),
+    canActivate: [GuestGuard],
+  },
+  {
+    path: userPaths.base,
+    loadChildren: () =>
+      import('~modules/user/user.routes').then((m) => m.USER_ROUTES),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: '**',
+    title: appPathTitles.notFound,
+    component: NotFoundPageComponent,
+  },
+];
