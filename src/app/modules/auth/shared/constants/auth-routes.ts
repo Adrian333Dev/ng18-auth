@@ -4,18 +4,20 @@ export const authPaths = {
   base: 'auth',
   login: 'log-in',
   register: 'register',
-  logout: 'logout',
+  // logout: 'logout',
 };
 
 export const authPathTitles = {
+  base: 'Auth',
   login: 'Log In',
   register: 'Register',
-  logout: 'Logout',
+  // logout: 'Logout',
 };
 
 
 export const authRoutes = {
-  login: `/${authPaths.base}/${authPaths.login}`,
-  register: `/${authPaths.base}/${authPaths.register}`,
-  logout: `/${authPaths.base}/${authPaths.logout}`,
+  base: `${authPaths.base}`,
+  login: `${authPaths.base}/${authPaths.login}`,
+  register: `${authPaths.base}/${authPaths.register}`,
+  // logout: `/${authPaths.base}/${authPaths.logout}`,
 };

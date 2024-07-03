@@ -21,6 +21,8 @@
     "@ngxs/devtools-plugin": "18.0.0-dev.master-c177048",
     "@ngxs/logger-plugin": "18.0.0-dev.master-c177048",
     "@ngxs/store": "18.0.0-dev.master-c177048",
+    "primeflex": "^3.3.1",
+    "primeng": "^17.18.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"

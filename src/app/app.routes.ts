@@ -1,33 +1,42 @@
-import { NotFoundPageComponent } from './modules/shared/pages/not-found/not-found.component';
 import { Routes } from '@angular/router';
 
 import {
   AuthGuard,
-  AUTH_ROUTES,
   authPaths,
   authPathTitles,
+  authRoutes,
   GuestGuard,
 } from '~modules/auth';
-import { appPathTitles, appPaths } from './constants';
-import { userPaths } from '~modules/user';
+import { appPathTitles, appPaths, appRoutes } from './constants';
+import { userPaths, userRoutes } from '~modules/user';
+import {
+  NotFoundPageComponent,
+  UnauthorizedPageComponent,
+} from './modules/shared/pages';
 
-export const appRoutes: Routes = [
+export const routes: Routes = [
   {
-    path: appPaths.home,
-    redirectTo: authPaths.login,
+    path: appRoutes.home,
+    redirectTo: authRoutes.login,
     pathMatch: 'full',
   },
   {
-    path: authPaths.base,
+    path: authRoutes.base,
+    title: authPathTitles.base,
     loadChildren: () =>
       import('~modules/auth/auth.routes').then((m) => m.AUTH_ROUTES),
     canActivate: [GuestGuard],
   },
   {
-    path: userPaths.base,
+    path: userRoutes.base,
     loadChildren: () =>
       import('~modules/user/user.routes').then((m) => m.USER_ROUTES),
     canActivate: [AuthGuard],
+  },
+  {
+    path: appPaths.unauthorized,
+    title: appPathTitles.unauthorized,
+    component: UnauthorizedPageComponent,
   },
   {
     path: '**',

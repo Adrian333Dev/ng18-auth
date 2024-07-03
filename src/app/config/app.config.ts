@@ -9,8 +9,9 @@ import {
 import { provideRouter } from '@angular/router';
 import { provideStore } from '@ngxs/store';
 import { withNgxsReduxDevtoolsPlugin } from '@ngxs/devtools-plugin';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
-import { appRoutes } from '~app';
+import { routes } from '~app';
 import { environment as env } from '~env/environment.development';
 import { AuthState } from '~modules/auth/store';
 import { authRoutes, provideAuth } from '~modules/auth';
@@ -19,8 +20,9 @@ const ngxsStates = [AuthState];
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideAnimations(),
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(appRoutes),
+    provideRouter(routes),
     provideStore(ngxsStates, withNgxsReduxDevtoolsPlugin()),
     provideHttpClient(
       withJsonpSupport(),
@@ -31,8 +33,8 @@ export const appConfig: ApplicationConfig = {
     provideAuth({
       apiUrl: env.apiUrl!,
       loginRedirect: authRoutes.login,
-      unauthorizedRedirect: '/unauthorized',
-      afterLogoutRedirect: '/',
+      unauthorizedRedirect: 'unauthorized',
+      afterLogoutRedirect: '',
     }),
   ],
 };

@@ -8,5 +8,6 @@ export const userPathTitles = {
 };
 
 export const userRoutes = {
-  dashboard: `/${userPaths.base}/${userPaths.dashboard}`,
+  base: `${userPaths.base}`,
+  dashboard: `${userPaths.base}/${userPaths.dashboard}`,
 };
